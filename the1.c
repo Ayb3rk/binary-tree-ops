@@ -40,13 +40,13 @@ void initialize_the_tree(int binary_tree[MAX_LENGTH], int get_values_from_user) 
  */
 void insert_node(int binary_tree[MAX_LENGTH], int node, char where, int value) {
 
-    if (where == 'l' && binary_tree[2*node+1] == -1){
+    if (where == 'l' && binary_tree[2*node+1] == -1 && 2*node+1 < MAX_LENGTH){
         binary_tree[2*node+1] = value;
     }
-    else if (where == 'r' && binary_tree[2*node+2] == -1){
+    else if (where == 'r' && binary_tree[2*node+2] == -1 && 2*node+2 < MAX_LENGTH){
         binary_tree[2*node+2] = value;
     }
-    else if (where == 'i' && binary_tree[node] == -1){
+    else if (where == 'i' && binary_tree[node] == -1 && node < MAX_LENGTH){
         binary_tree[node] = value;
     }
 }
@@ -98,7 +98,7 @@ void draw_binary_tree_rec(int binary_tree[MAX_LENGTH], int root, int depth) {
 
 int find_height_of_tree_rec(int binary_tree[MAX_LENGTH], int root) {
     int left,right;
-    if (binary_tree[2*root+1] == -1 && binary_tree[2*root+2] == -1 ){
+    if ((binary_tree[2*root+1] == -1 && binary_tree[2*root+2] == -1) || 2*root+1 > MAX_LENGTH ){
         return 0;
     }
     else {
