@@ -16,7 +16,7 @@ void initialize_the_tree(int binary_tree[MAX_LENGTH], int get_values_from_user) 
     }
     if (get_values_from_user =! 0) {
         scanf("%d",&val_num);
-        while (val_num >= 0){
+        while (val_num > 0){
             val_num--;
             scanf("%d %f",&index,&value);
             if (binary_tree[index] == value || index < 0 || index > MAX_LENGTH ||value < MIN_VAL || value > MAX_VAL ){
@@ -39,6 +39,7 @@ void initialize_the_tree(int binary_tree[MAX_LENGTH], int get_values_from_user) 
  * If the value for the inserted node already exists, it ignores and does nothing.
  */
 void insert_node(int binary_tree[MAX_LENGTH], int node, char where, int value) {
+
     if (where == 'l' && binary_tree[2*node+1] == -1){
         binary_tree[2*node+1] = value;
     }
@@ -56,14 +57,12 @@ void insert_node(int binary_tree[MAX_LENGTH], int node, char where, int value) {
  * descendants will be also purged.  Deleting means putting -1 value to the proper area in the array.
  */
 void delete_node_rec(int binary_tree[MAX_LENGTH], int node) {
-    if (node > MAX_LENGTH){
-        ;
-    }
-    else {
+    if (node < MAX_LENGTH && binary_tree[node] != -1){
         binary_tree[node] = -1;
         delete_node_rec(binary_tree,2*node+1);
         delete_node_rec(binary_tree,2*node+2);
     }
+
     
 }
 
@@ -82,10 +81,7 @@ void tabgiver(int depth){
     }
 }
 void draw_binary_tree_rec(int binary_tree[MAX_LENGTH], int root, int depth) {
-    if (binary_tree[root] == -1){
-        return;
-    }
-    else {
+    if (binary_tree[root] != -1 && root < MAX_LENGTH){
         draw_binary_tree_rec(binary_tree,2*root+1,depth-1);
         tabgiver(depth);
         printf("%d\n",binary_tree[root]);
@@ -183,7 +179,7 @@ int breadth_first_search_itr(int binary_tree[MAX_LENGTH], int root, int value) {
 
 int depth_first_search_rec(int binary_tree[MAX_LENGTH], int root, int value) {
     if (binary_tree[root] == -1){
-        return;
+        return -1;
     }
     depth_first_search_rec(binary_tree,2*root+1,value);
     if (binary_tree[root] == value){
@@ -215,4 +211,3 @@ void print_binary_tree_values(int binary_tree[MAX_LENGTH]) {
     }
 
 }
-
