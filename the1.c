@@ -11,7 +11,7 @@
 void initialize_the_tree(int binary_tree[MAX_LENGTH], int get_values_from_user) {
     int i,val_num,index;
     float value;
-    for (i = 0;i <= MAX_LENGTH;i++){
+    for (i = 0;i < MAX_LENGTH;i++){
         binary_tree[i] = -1;
     }
     if (get_values_from_user =! 0) {
