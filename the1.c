@@ -102,12 +102,16 @@ void draw_binary_tree_rec(int binary_tree[MAX_LENGTH], int root, int depth) {
 
 int find_height_of_tree_rec(int binary_tree[MAX_LENGTH], int root) {
     int left,right;
-    if (binary_tree[root] == -1){
-        return -1;
+    if (binary_tree[2*root+1] == -1 && binary_tree[2*root+2] == -1 ){
+        return 0;
     }
     else {
-        left = find_height_of_tree_rec(binary_tree, 2*root+1);
-        right = find_height_of_tree_rec(binary_tree, 2*root+2);
+        if (2*root+1 < MAX_LENGTH){
+            left = find_height_of_tree_rec(binary_tree, 2*root+1);
+        }
+        if (2*root+2 < MAX_LENGTH){
+            right = find_height_of_tree_rec(binary_tree, 2*root+2);
+        }
         if (left > right) {
            return(left+1); 
         }
